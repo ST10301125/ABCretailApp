@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ABCretailApp.Services
 {
-     
+      
     public class BlobService
     {
         private readonly BlobServiceClient blobServiceClient;
