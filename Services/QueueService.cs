@@ -11,7 +11,8 @@ namespace ABCretailApp.Services
 
         public QueueService(IConfiguration configuration)
         {
-            queueServiceClient = new QueueServiceClient(configuration["AzureStorage:ConnectionStringBuilder"]);
+            var connectionString = configuration["AzureStorage:ConnectionString"];
+            queueServiceClient = new QueueServiceClient(connectionString);
         }
 
         public async Task SendMessageAsync(string queueName, string message)
@@ -19,6 +20,19 @@ namespace ABCretailApp.Services
             var queueClient = queueServiceClient.GetQueueClient(queueName);
             await queueClient.CreateIfNotExistsAsync();
             await queueClient.SendMessageAsync(message);
+        }
+        public async Task<string?> ReceiveMessageAsync(string queueName)
+        {
+            var queueClient = queueServiceClient.GetQueueClient(queueName);
+            var message = await queueClient.ReceiveMessageAsync();
+
+            if (message.Value != null)
+            {
+                await queueClient.DeleteMessageAsync(message.Value.MessageId, message.Value.PopReceipt);
+                return message.Value.MessageText;
+            }
+
+            return null;
         }
     }
 }

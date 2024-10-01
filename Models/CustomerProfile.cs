@@ -2,7 +2,7 @@
 using Azure.Data.Tables;
 using System;
 
-namespace SemesterTwo.Models
+namespace Part1.Models
 {
     public class CustomerProfile : ITableEntity
     {
@@ -12,8 +12,9 @@ namespace SemesterTwo.Models
         public ETag ETag { get; set; }
 
         public string FirstName { get; set; }
-        public string LastName { get; set; }    
+        public string LastName { get; set; }
         public string Email { get; set; }
+        public string PhoneNum { get; set; }
 
         public CustomerProfile()
         {

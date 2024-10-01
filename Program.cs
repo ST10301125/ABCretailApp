@@ -2,10 +2,13 @@ using ABCretailApp.Services;
 
 namespace Part1
 {
-    public class Program {
-        
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
             var builder = WebApplication.CreateBuilder(args);
 
+            // Add services to the container.
             builder.Services.AddControllersWithViews();
 
             // Register your custom services
@@ -39,5 +42,3 @@ namespace Part1
         }
     }
 }
-            
-            

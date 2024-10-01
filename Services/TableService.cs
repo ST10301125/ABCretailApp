@@ -1,5 +1,8 @@
-﻿using Azure.Data.Tables;
-using SemesterTwo.Models;
+﻿using ABCretailApp.Models;
+using Azure;
+using Azure.Data.Tables;
+using Microsoft.Extensions.Configuration;
+using Part1.Models;
 using System.Threading.Tasks;
 
 namespace ABCretailApp.Services
@@ -18,8 +21,39 @@ namespace ABCretailApp.Services
 
         public async Task AddEntityAsync(CustomerProfile profile)
         {
-            await tableClient.AddEntityAsync(profile);
+            var entity = new TableEntity(profile.PartitionKey, profile.RowKey)
+            {
+                { "FirstName", profile.FirstName },
+                { "LastName", profile.LastName },
+                { "Email", profile.Email },
+                { "PhoneNumber", profile.PhoneNum }
+            };
+
+            await tableClient.AddEntityAsync(entity);
+        }
+        public async Task UpsertEntityAsync(CustomerProfile profile)
+        {
+            var entity = new TableEntity(profile.PartitionKey, profile.RowKey)
+            {
+                { "FirstName", profile.FirstName },
+                { "LastName", profile.LastName },
+                { "Email", profile.Email },
+                { "PhoneNumber", profile.PhoneNum }
+            };
+
+            await tableClient.UpsertEntityAsync(entity);
+        }
+        public async Task UpdateEntityAsync(CustomerProfile profile, ETag eTag)
+        {
+            await tableClient.UpdateEntityAsync(profile, eTag, TableUpdateMode.Replace);
         }
 
+        public async Task DeleteEntityAsync(string partitionKey, string rowKey)
+        {
+            await tableClient.DeleteEntityAsync(partitionKey, rowKey);
+        }
     }
-}
+}        
+        
+        
+     

@@ -25,5 +25,13 @@ namespace ABCretailApp.Services
             await fileClient.CreateAsync(content.Length);
             await fileClient.UploadAsync(content);
         }
+        public async Task<Stream> DownloadFileAsync(string shareName, string directoryName, string fileName)
+        {
+            var shareClient = shareServiceClient.GetShareClient(shareName);
+            var directoryClient = shareClient.GetDirectoryClient(directoryName);
+            var fileClient = directoryClient.GetFileClient(fileName);
+            ShareFileDownloadInfo download = await fileClient.DownloadAsync();
+            return download.Content;
+        }
     }
 }

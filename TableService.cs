@@ -1,5 +1,6 @@
-﻿using Azure.Data.Tables;
-using SemesterTwo.Models;
+﻿using ABCretailApp.Models;
+using Azure.Data.Tables;
+using Part1.Models;
 using System.Threading.Tasks;
 
 namespace Part1.Services

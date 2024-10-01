@@ -1,6 +1,7 @@
+using ABCretailApp.Models;
 using ABCretailApp.Services;
 using Microsoft.AspNetCore.Mvc;
-using SemesterTwo.Models;
+using Part1.Models;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -12,10 +13,10 @@ namespace Part1.Controllers
 
         public HomeController(BlobService blobService, TableService tableService, QueueService queueService, FileService fileService)
         {
-            blobService = blobService;
+            blobService = blobService ?? throw new ArgumentNullException(nameof(blobService));
             tableService = tableService ?? throw new ArgumentNullException(nameof(tableService));
-            queueService = queueService;
-            fileService = fileService;
+            queueService = queueService ?? throw new ArgumentNullException(nameof(queueService));
+            fileService = fileService ?? throw new ArgumentNullException(nameof(fileService));
         }
 
         public IActionResult Index()
@@ -40,7 +41,7 @@ namespace Part1.Controllers
         {
             if (ModelState.IsValid)
             {
-                await tableService.AddEntityAsync(profile); 
+                await tableService.AddEntityAsync(profile: profile); 
             }
             return RedirectToAction("Index");
         }

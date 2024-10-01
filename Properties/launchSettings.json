@@ -12,15 +12,17 @@
     "https": {
       "commandName": "Project",
       "launchBrowser": true,
+      "launchUrl": "http://ST10301125.azurewebsites.net",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "https://localhost:7217;http://localhost:5284"
+      "applicationUrl": "http://ST10301125.azurewebsites.net"
     },
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
+      "launchUrl": "http://ST10301125.azurewebsites.net",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -42,7 +44,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:26719",
+      "applicationUrl": "http://ST10301125.azurewebsites.net",
       "sslPort": 44307
     }
   }
