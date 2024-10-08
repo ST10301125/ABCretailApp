@@ -3,21 +3,11 @@
     "http": {
       "commandName": "Project",
       "launchBrowser": true,
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
+      "launchUrl": "http://st10301125.azurewebsites.net/",
       "dotnetRunMessages": true,
-      "applicationUrl": "http://localhost:5284"
-    },
-    "https": {
-      "commandName": "Project",
-      "launchBrowser": true,
-      "launchUrl": "http://ST10301125.azurewebsites.net",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "dotnetRunMessages": true,
-      "applicationUrl": "http://ST10301125.azurewebsites.net"
+      "applicationUrl": "http://st10301125.azurewebsites.net/",
+      "sqlDebugging": true,
+      "nativeDebugging": true
     },
     "IIS Express": {
       "commandName": "IISExpress",
@@ -37,6 +27,9 @@
       },
       "publishAllPorts": true,
       "useSSL": true
+    },
+    "Profile 1": {
+      "commandName": "Executable"
     }
   },
   "$schema": "http://json.schemastore.org/launchsettings.json",
@@ -44,7 +37,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://ST10301125.azurewebsites.net",
+      "applicationUrl": "https://ST10301125.azurewebsites.net",
       "sslPort": 44307
     }
   }

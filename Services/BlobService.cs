@@ -15,19 +15,13 @@ namespace ABCretailApp.Services
             blobServiceClient = new BlobServiceClient(configuration["AzureStorage:ConnectionString"]);
         }
 
-        public async Task UploadBlobAsync(string blobName, Stream content)
+        public async Task UploadBlobAsync(string blobName, string fileName, Stream content)
         {
             var containerClient = blobServiceClient.GetBlobContainerClient(blobName);
             await containerClient.CreateIfNotExistsAsync();
 
             var blobClient = containerClient.GetBlobClient(blobName);
             await blobClient.UploadAsync(content, true);
-        }
-        public async Task UploadTextAsync(string blobName, string content)
-        {
-            using var stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(content));
-
-            await UploadBlobAsync(blobName, stream);
         }
     }
 }

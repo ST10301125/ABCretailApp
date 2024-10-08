@@ -14,7 +14,7 @@ namespace ABCretailApp.Services
             var connectionString = configuration["AzureStorage:ConnectionString"];
             queueServiceClient = new QueueServiceClient(connectionString);
         }
-
+        
         public async Task SendMessageAsync(string queueName, string message)
         {
             var queueClient = queueServiceClient.GetQueueClient(queueName);

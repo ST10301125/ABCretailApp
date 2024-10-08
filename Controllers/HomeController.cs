@@ -13,10 +13,10 @@ namespace Part1.Controllers
 
         public HomeController(BlobService blobService, TableService tableService, QueueService queueService, FileService fileService)
         {
-            blobService = blobService ?? throw new ArgumentNullException(nameof(blobService));
-            tableService = tableService ?? throw new ArgumentNullException(nameof(tableService));
-            queueService = queueService ?? throw new ArgumentNullException(nameof(queueService));
-            fileService = fileService ?? throw new ArgumentNullException(nameof(fileService));
+            this.blobService = blobService ?? throw new ArgumentNullException(nameof(blobService));
+            this.tableService = tableService ?? throw new ArgumentNullException(nameof(tableService));
+            this.queueService = queueService ?? throw new ArgumentNullException(nameof(queueService));
+            this.fileService = fileService ?? throw new ArgumentNullException(nameof(fileService));
         }
 
         public IActionResult Index()
