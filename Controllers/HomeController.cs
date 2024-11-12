@@ -1,7 +1,7 @@
 using ABCretailApp.Models;
 using ABCretailApp.Services;
 using Microsoft.AspNetCore.Mvc;
-using Part1.Models;
+using ABCretailApp.Models;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -25,15 +25,20 @@ namespace Part1.Controllers
         }
 
         [HttpPost]
-        public async Task <IActionResult> UploadImage(IFormFile file)
+        public async Task<IActionResult> UploadImage(IFormFile file)
         {
-            if (file != null)
+            if (file != null && file.Length > 0)
             {
-                using var stream = file.OpenReadStream();
-                await blobService.UploadBlobAsync("product-images", file.FileName, stream);
+                using var memoryStream = new MemoryStream();
+                await file.CopyToAsync(memoryStream);
+                var imageData = memoryStream.ToArray(); 
+
+                await blobService.UploadBlobAsync(imageData, "product-images", file.FileName);
             }
+
             return RedirectToAction("Index");
         }
+
 
         [HttpPost]
 
@@ -51,7 +56,7 @@ namespace Part1.Controllers
         {
             await queueService.SendMessageAsync("order-processing", $"Processing order {orderId}");
             return RedirectToAction("Index");
-        }
+        } 
 
         [HttpPost]
         public async Task<IActionResult> UploadContract(IFormFile file)

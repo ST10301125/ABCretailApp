@@ -2,7 +2,7 @@
 using Azure;
 using Azure.Data.Tables;
 using Microsoft.Extensions.Configuration;
-using Part1.Models;
+using ABCretailApp.Models;
 using System.Threading.Tasks;
 
 namespace ABCretailApp.Services

@@ -1,6 +1,9 @@
 using ABCretailApp.Services;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
-namespace Part1
+namespace ABCretailApp
 {
     public class Program
     {
@@ -11,6 +14,7 @@ namespace Part1
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddHttpClient();
 
             // Register your custom services
             builder.Services.AddSingleton<BlobService>();

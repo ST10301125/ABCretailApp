@@ -1,9 +1,98 @@
-﻿@model Part1.Models.CustomerProfile
-{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model ABCretailApp.Models.CustomerProfile
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container">
+    <hr />
+
+    <section class="profile-form">
+        <form asp-action="StoreTableInfo" method="post" enctype="multipart/form-data">
+            <h3>Add Profile Information</h3>
+            <div class="form-group">
+                <label for="first-name">First Name:</label>
+                <input type="text" id="first-name" name="FirstName" placeholder="Enter first name" required>
+            </div>
+            <div class="form-group">
+                <label for="last-name">Last Name:</label>
+                <input type="text" id="last-name" name="LastName" placeholder="Enter last name" required>
+            </div>
+            <div class="form-group">
+                <label for="phone-number">Phone Number:</label>
+                <input type="text" id="phone-number" name="PhoneNumber" placeholder="Enter phone number" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="Email" placeholder="Enter email address" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Add Profile</button>
+            </div>
+        </form>
+    </section>
+
+    <section class="upload-section mt-4">
+        <h3>Upload Files</h3>
+
+        <form asp-action="UploadFile" method="post" enctype="multipart/form-data" class="upload-form">
+            <label for="contract-file">Contract Document:</label>
+            <input type="file" id="contract-file" name="contractFile" required>
+            <button type="submit" class="btn btn-secondary">Upload Contract</button>
+        </form>
+
+        <form asp-action="UploadBlob" method="post" enctype="multipart/form-data" class="upload-form mt-3">
+            <label for="image-file">Profile Image:</label>
+            <input type="file" id="image-file" name="imageFile" required>
+            <button type="submit" class="btn btn-secondary">Upload Image</button>
+        </form>
+    </section>
+
+    <section class="order-processing mt-4">
+        <h3>Process Order</h3>
+        <form asp-action="ProcessQueueMessage" method="post">
+            <div class="form-group">
+                <label for="order-id">Order ID:</label>
+                <input type="text" id="order-id" name="orderId" placeholder="Enter Order ID" required>
+            </div>
+            <button type="submit" class="btn btn-info">Process Order</button>
+        </form>
+    </section>
 </div>
+
+<style>
+    .container {
+        max-width: 800px;
+        margin: auto;
+    }
+
+    h2, h3 {
+        color: #2c3e50;
+    }
+
+    .profile-form, .upload-section, .order-processing {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        margin-top: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .btn {
+        margin-top: 10px;
+        padding: 10px 15px;
+    }
+</style>

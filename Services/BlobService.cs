@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using System.Data.Common;
 using System.IO;
+using System.Data.SqlClient;
 using System.Threading.Tasks;
 
 namespace ABCretailApp.Services
@@ -9,19 +10,32 @@ namespace ABCretailApp.Services
        
     public class BlobService
     {
-        private readonly BlobServiceClient blobServiceClient;
+        private readonly IConfiguration _configuration;
         public BlobService(IConfiguration configuration)
         {
-            blobServiceClient = new BlobServiceClient(configuration["AzureStorage:ConnectionString"]);
+            _configuration = configuration;
         }
 
-        public async Task UploadBlobAsync(string blobName, string fileName, Stream content)
+        public async Task UploadBlobAsync(byte[] imageData, string v, string fileName)
         {
-            var containerClient = blobServiceClient.GetBlobContainerClient(blobName);
-            await containerClient.CreateIfNotExistsAsync();
+            var connectionString = _configuration.GetConnectionString("DefaultConnection");
 
-            var blobClient = containerClient.GetBlobClient(blobName);
-            await blobClient.UploadAsync(content, true);
+            // SQL query to insert the blob data
+            var query = @"INSERT INTO BlobTable (BlobImage, FileName) VALUES (@BlobImage, @FileName)";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+
+                // Add the byte array as a parameter
+                command.Parameters.AddWithValue("@BlobImage", imageData);
+                command.Parameters.AddWithValue("@FileName", fileName); // Optionally store the file name as well
+
+                // Open connection and execute query
+                connection.Open();
+                await command.ExecuteNonQueryAsync();
+            }
         }
+
     }
 }

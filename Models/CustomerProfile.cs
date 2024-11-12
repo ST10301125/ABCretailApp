@@ -2,7 +2,7 @@
 using Azure.Data.Tables;
 using System;
 
-namespace Part1.Models
+namespace ABCretailApp.Models
 {
     public class CustomerProfile : ITableEntity
     {
@@ -16,10 +16,28 @@ namespace Part1.Models
         public string Email { get; set; }
         public string PhoneNum { get; set; }
 
+        public string? ContractFilePath { get; set; }
+        public string? ImageFilePath { get; set; }
+
         public CustomerProfile()
         {
             PartitionKey = "CustomerProfile";
             RowKey = Guid.NewGuid().ToString();
+
+            FirstName = string.Empty;
+            LastName = string.Empty;
+            Email = string.Empty;
+            PhoneNum = string.Empty;
+
+            ContractFilePath = string.Empty;
+            ImageFilePath = string.Empty;
+
+
+
+
+
+
+
         }
 
     }
